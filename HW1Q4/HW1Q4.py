@@ -8,6 +8,7 @@ import pandas as pd  # data importation package
 from matplotlib import pyplot as plt  # importing plotting environment
 import csv
 import random
+import os
 
 n = 40
 eq = 40 # 200 in total
@@ -17,16 +18,19 @@ LHS = np.zeros((eq, n))
 RHS = np.zeros((eq, 1))
 sol = np.zeros((eq, 1))
 
-data = pd.read_csv("c:\\Users\\laure\OneDrive - University of Ottawa\Desktop\Masters Degree\All\Classes\CSI5138\\26H01.dat", header=0)
+#print (os.getcwd())
 
-file = open("c:\\Users\\laure\OneDrive - University of Ottawa\Desktop\Masters Degree\All\Classes\CSI5138\\26H01.dat")
+data = pd.read_csv("./HW1Q4/26H01.dat", header=0)
+
+file = open("./HW1Q4/26H01.dat")
 
 content = file.readlines()
 
 #print(data)
-#print(content[2][41])
+#print(content[2])
+#exit()
 
-solutionSets = 300
+solutionSets = 3000
 solArray = np.zeros((solutionSets, eq))
 
 solutionRows = np.zeros((solutionSets, eq))
@@ -34,7 +38,7 @@ solutionRows = np.zeros((solutionSets, eq))
 for i in range(solutionSets):
     solutionRows[i] = random.sample(range(0, 199), eq)
 
-print(solutionRows)
+#print(solutionRows)
 
 for i in range(solutionSets):
     if (solutionRows[i].size != eq):
@@ -45,18 +49,15 @@ for i in range(solutionSets):
 for k in range(solutionSets):
     #exit()
     for i in range(eq):
-        print(i)
+        #print(i)
        
         eqAdd = int(solutionRows[k][i])
-        print(eqAdd)
-        RHS[i] = content[eqAdd + 1][41] # Slot 41 is just after the | and holds the RHS
+        RHS[i] = int(content[eqAdd + 1][41]) # Slot 41 is just after the | and holds the RHS
         
         for j in range(n):
-            LHS[i][j] = content[eqAdd + 1][j]
+            LHS[i][j] = int(content[eqAdd + 1][j])
 
     sol = np.linalg.solve(LHS, RHS)
-    #print(sol)
-
     for i in range(eq):
         if sol[i] < 0:
             sol[i] = 1

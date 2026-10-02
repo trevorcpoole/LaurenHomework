@@ -8,6 +8,7 @@ import pandas as pd  # data importation package
 from matplotlib import pyplot as plt  # importing plotting environment
 import csv
 import random
+import os
 
 n = 40
 eq = 40 # 200 in total
@@ -17,9 +18,9 @@ LHS = np.zeros((eq, n))
 RHS = np.zeros((eq, 1))
 sol = np.zeros((eq, 1))
 
-data = pd.read_csv("c:\\Users\\laure\OneDrive - University of Ottawa\Desktop\Masters Degree\All\Classes\CSI5138\\26H01.dat", header=0)
-
-file = open("c:\\Users\\laure\OneDrive - University of Ottawa\Desktop\Masters Degree\All\Classes\CSI5138\\26H01.dat")
+# print(os.getcwd()) # Get current working directory
+data = pd.read_csv("./data/26H01.dat", header=0) # Current working directory
+file = open("./data/26H01.dat")
 
 content = file.readlines()
 

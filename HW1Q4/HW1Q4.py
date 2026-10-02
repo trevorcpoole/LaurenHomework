@@ -1,12 +1,5 @@
-import numpy as np # Personalized code for importing \\library 
-import matplotlib.pyplot as plt # Python plotting
-import math
-import numpy as np # importing python's numerical processing package numpy and giving it a short name "np"
-import scipy as sp #importing scientific data processing package scipy
-#from scipy.optimize import curve_fit #importing curve fitting package
+import numpy as np 
 import pandas as pd  # data importation package
-from matplotlib import pyplot as plt  # importing plotting environment
-import csv
 import random
 import os
 
@@ -24,9 +17,6 @@ file = open("./data/26H01.dat")
 
 content = file.readlines()
 
-#print(data)
-#print(content[2][41])
-
 solutionSets = 300
 solArray = np.zeros((solutionSets, eq))
 
@@ -42,9 +32,7 @@ for i in range(solutionSets):
         print("Invalid solution row at ", i)
         exit()
 
-
 for k in range(solutionSets):
-    #exit()
     for i in range(eq):
         print(i)
        
@@ -56,7 +44,6 @@ for k in range(solutionSets):
             LHS[i][j] = content[eqAdd + 1][j]
 
     sol = np.linalg.solve(LHS, RHS)
-    #print(sol)
 
     for i in range(eq):
         if sol[i] < 0:
@@ -65,11 +52,7 @@ for k in range(solutionSets):
             sol[i] = 0
         else:
             print("Error.")
-
     solArray[k] = np.transpose(sol)
-
-
-#print(solArray)
 
 for i in range(solutionSets):
     for j in range(i+1, solutionSets):

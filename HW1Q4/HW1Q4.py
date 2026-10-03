@@ -11,6 +11,7 @@ LHS = np.zeros((eq, n))
 RHS = np.zeros((eq, 1))
 sol = np.zeros((eq, 1))
 
+<<<<<<< HEAD
 # print(os.getcwd()) # Get current working directory
 data = pd.read_csv("./data/26H01.dat", header=0) # Current working directory
 file = open("./data/26H01.dat")
@@ -18,6 +19,21 @@ file = open("./data/26H01.dat")
 content = file.readlines()
 
 solutionSets = 300
+=======
+#print (os.getcwd())
+
+data = pd.read_csv("./HW1Q4/26H01.dat", header=0)
+
+file = open("./HW1Q4/26H01.dat")
+
+content = file.readlines()
+
+#print(data)
+#print(content[2])
+#exit()
+
+solutionSets = 3000
+>>>>>>> f949cf2ea39492e100d24bb6208f527c5a467dce
 solArray = np.zeros((solutionSets, eq))
 
 solutionRows = np.zeros((solutionSets, eq))
@@ -25,7 +41,7 @@ solutionRows = np.zeros((solutionSets, eq))
 for i in range(solutionSets):
     solutionRows[i] = random.sample(range(0, 199), eq)
 
-print(solutionRows)
+#print(solutionRows)
 
 for i in range(solutionSets):
     if (solutionRows[i].size != eq):
@@ -34,17 +50,19 @@ for i in range(solutionSets):
 
 for k in range(solutionSets):
     for i in range(eq):
-        print(i)
+        #print(i)
        
         eqAdd = int(solutionRows[k][i])
-        print(eqAdd)
-        RHS[i] = content[eqAdd + 1][41] # Slot 41 is just after the | and holds the RHS
+        RHS[i] = int(content[eqAdd + 1][41]) # Slot 41 is just after the | and holds the RHS
         
         for j in range(n):
-            LHS[i][j] = content[eqAdd + 1][j]
+            LHS[i][j] = int(content[eqAdd + 1][j])
 
     sol = np.linalg.solve(LHS, RHS)
+<<<<<<< HEAD
 
+=======
+>>>>>>> f949cf2ea39492e100d24bb6208f527c5a467dce
     for i in range(eq):
         if sol[i] < 0:
             sol[i] = 1
